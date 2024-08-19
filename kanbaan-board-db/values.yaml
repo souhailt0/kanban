@@ -1,0 +1,33 @@
+namespace: kanban-board
+
+db:
+  replicaCount: 1
+  tier: db
+  image:
+    repository: postgres
+    pullPolicy: IfNotPresent
+    tag: "9.6-alpine"
+  container:
+    name: kanban-board-db
+    port: 5432
+  env:
+    postgresdb: kanban
+    postgresuser: kanban
+    postgrespassword: kanban 
+  imagePullSecrets: []
+  nameOverride: ""
+  fullnameOverride: ""
+
+
+  service:
+    type: ClusterIP
+    port: 5432
+pv:
+  storage: 4Gi
+  accessModes: ReadWriteMany
+  hostPath: "/data/postgresql"
+
+pvc:
+  storage: 4Gi
+  accessModes: ReadWriteMany
+

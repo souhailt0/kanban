@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    tier: {{ .Values.db.tier }}
+spec:
+  selector:
+    matchLabels:
+      tier: {{ .Values.db.tier }}
+  replicas: {{ .Values.db.replicaCount }}
+  template:
+    metadata:
+      name: {{ .Release.Name }}
+      namespace: {{ .Values.namespace }}
+      labels:
+        tier: {{ .Values.db.tier }}
+    spec:
+      containers:
+        - name: {{ .Values.db.container.name }}
+          image: {{ .Values.db.image.repository }}:{{ .Values.db.image.tag }}
+          ports:
+            - containerPort: {{ .Values.db.container.port }}
+          env:
+            - name: POSTGRES_DB
+              value: {{ .Values.db.env.postgresdb }}
+            - name: POSTGRES_USER
+              value: {{ .Values.db.env.postgresuser }}
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.db.env.postgrespassword }}
+          volumeMounts:
+            - name: {{ .Release.Name }}-data
+              mountPath: /var/lib/postgresql/data 
+      volumes:
+        - name: {{ .Release.Name }}-data
+          persistentVolumeClaim:
+           claimName: {{ .Release.Name }}-data-claim

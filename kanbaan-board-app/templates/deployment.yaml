@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    tier: {{ .Values.app.tier }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.app.replicaCount }}
+  selector:
+    matchLabels:
+      tier: {{ .Values.app.tier }}
+  template:
+    metadata:
+      name: {{ .Release.Name }}
+      labels:
+        tier: {{ .Values.app.tier }}
+    spec:
+      containers:
+        - name: {{ .Values.app.container.name }}
+          image: {{ .Values.app.image.repository }} 
+          ports:
+            - containerPort: {{ .Values.app.container.port }}
+          env:
+            - name: DB_SERVER
+              value: kanban-board-db-svc
+            - name: POSTGRES_DB
+              value: {{ .Values.db.env.postgresdb }}
+            - name: POSTGRES_USER
+              value: {{ .Values.db.env.postgresuser }}
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.db.env.postgrespassword }}

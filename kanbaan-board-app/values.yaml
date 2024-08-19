@@ -1,0 +1,24 @@
+namespace: kanban-board
+app:
+  replicaCount: 1
+  tier: app
+  image:
+    repository: str24/kanban-board-app
+    pullPolicy: IfNotPresent
+    tag: "latest"
+  container:
+    name: kanban-board-app
+    port: 8080
+  imagePullSecrets: []
+  nameOverride: ""
+  fullnameOverride: ""
+
+
+  service:
+    type: ClusterIP
+    port: 8080
+db:
+  env:
+    postgresdb: kanban
+    postgresuser: kanban
+    postgrespassword: kanban

@@ -1,0 +1,24 @@
+namespace: kanban-board
+ingress:
+  name: ingress
+
+ui:
+  replicaCount: 1
+  tier: ui
+  image:
+    repository: str24/kanban-ui
+    pullPolicy: IfNotPresent
+    tag: "latest"
+  container:
+    name: kanban-board-ui
+    port: 80
+  imagePullSecrets: []
+  nameOverride: ""
+  fullnameOverride: ""
+
+
+  service:
+    type: ClusterIP
+    port: 80
+
+
