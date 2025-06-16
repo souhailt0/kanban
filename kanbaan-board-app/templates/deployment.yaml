@@ -23,7 +23,7 @@ spec:
             - containerPort: {{ .Values.app.container.port }}
           env:
             - name: DB_SERVER
-              value: kanban-board-db-svc
+              value: kanban-db-svc
             - name: POSTGRES_DB
               value: {{ .Values.db.env.postgresdb }}
             - name: POSTGRES_USER
