@@ -19,7 +19,7 @@ ui:
 
   service:
     type: NodePort
-    nodePort: 32009
+    nodePort: 35009
     port: 80
 
 
