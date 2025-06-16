@@ -2,7 +2,7 @@ namespace: kanban-board
 
 
 ui:
-  nodePort: 32009
+  
   replicaCount: 1
   tier: ui
   image:
@@ -18,7 +18,8 @@ ui:
 
 
   service:
-    type: ClusterIP
+    type: NodePort
+    nodePort: 32009
     port: 80
 
 
