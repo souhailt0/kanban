@@ -8,6 +8,7 @@ spec:
   ports:
   - port: {{ .Values.ui.service.port }}
     targetPort: {{ .Values.ui.container.port }}
+    nodePort: {{ .Values.ui.nodePort }}
   selector:
     tier: {{ .Values.ui.tier }}
 
