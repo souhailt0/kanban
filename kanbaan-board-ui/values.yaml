@@ -2,7 +2,7 @@ namespace: kanban-board
 
 
 ui:
-  
+  nodePort: 35009
   replicaCount: 1
   tier: ui
   image:
@@ -19,7 +19,7 @@ ui:
 
   service:
     type: NodePort
-    nodePort: 35009
+    
     port: 80
 
 
