@@ -1,8 +1,8 @@
 namespace: kanban-board
-ingress:
-  name: ingress
+
 
 ui:
+  nodePort: 32009
   replicaCount: 1
   tier: ui
   image:
